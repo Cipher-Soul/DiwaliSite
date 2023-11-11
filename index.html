@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bakbak+One&family=Bungee+Spice&family=Press+Start+2P&family=Rubik+Pixels&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background: url("images/anirudh-ib3d1uX1LLc-unsplash.jpg");
+      background-size:cover;
+      background-attachment: fixed;
+      color: white;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+
+      background:rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding:30px;
+      border-top:1px solid rgba(255, 255, 255, 0.288);
+      border-left:1px solid rgba(255, 255, 255, 0.322);
+      border-bottom:1px solid rgba(255, 68, 0, 0.192);
+
+      box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.233);
+    }
+
+    h1 {
+      font-size: 80px;
+      font-family: 'bungee spice';
+      text-transform: uppercase;
+    }
+
+    .glitchtext {
+      font-size:40px;
+      color: rgb(255, 255, 255);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12" style="min-height:900px;">
+        <div class="hero-changing-text-div center">
+          <h1>Happy Digital diwali to all <br></h1>
+          <hr>
+          <span class="glitchtext"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 p-5" style="min-height:700px;background:orange;">
+       <h1 style="font-weight: 800;font-family: Arial, Helvetica, sans-serif;color:orangered"> Why Do We<br> Celebrate Diwali?</h1>
+       <p style="font-size:30px;font-weight: 400;">
+        Lord Rama returned to Ayodhya after 14 years of exile. All the people of Ayodhya were tremendously happy to hear the news. They decorated the whole place with flowers and lighted lamps all around. They made Ayodhya very beautiful. When Lord Rama reached Ayodhya they worshipped all of them.
+        After their arrival in Ayodhya, people start celebrating that day as Diwali every year. People light lamps and decorate their homes with flowers. Diwali is to celebrate the victory of good over evil. People showcase their happiness and love towards each other. They give sweets to each other
+      </p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <script>
+    class TextScramble {
+      constructor(el) {
+        this.el = el;
+        this.chars = "!<>-_\\/[]{}—=+*^?#________";
+        this.update = this.update.bind(this);
+        }
+      setText(newText) {
+        const oldText = this.el.innerText;
+        const length = Math.max(oldText.length, newText.length);
+        const promise = new Promise((resolve) => (this.resolve = resolve));
+        this.queue = [];
+        for (let i = 0; i < length; i++) {
+          const from = oldText[i] || "";
+          const to = newText[i] || "";
+          const start = Math.floor(Math.random() * 40);
+          const end = start + Math.floor(Math.random() * 40);
+          this.queue.push({
+            from,
+            to,
+            start,
+            end
+          });
+        }
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        this.update();
+        return promise;
+      }
+      update() {
+        let output = "";
+        let complete = 0;
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+          let { from, to, start, end, char } = this.queue[i];
+          if (this.frame >= end) {
+            complete++;
+            output += to;
+          } else if (this.frame >= start) {
+            if (!char || Math.random() < 0.28) {
+              char = this.randomChar();
+              this.queue[i].char = char;
+            }
+            output += `<span class="dud">${char}</span>`;
+          } else {
+            output += from;
+          }
+        }
+        this.el.innerHTML = output;
+        if (complete === this.queue.length) {
+          this.resolve();
+        } else {
+          this.frameRequest = requestAnimationFrame(this.update);
+          this.frame++;
+        }
+      }
+      randomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)];
+      }
+    }
+
+    const phrases = [
+      "My Freinds",
+      "My classmates.",
+      "All freind who are very far from me",
+      "My family member and relatives.",
+      "And myself",
+      "By ankit",
+    ];
+
+    const el = document.querySelector(".glitchtext");
+    const fx = new TextScramble(el);
+
+    let counter = 0;
+    const next = () => {
+      fx.setText(phrases[counter]).then(() => {
+        setTimeout(next, 2200);
+      });
+      counter = (counter + 1) % phrases.length;
+    };
+
+    next();
+  </script>
+
+</body>
+
+</html>
