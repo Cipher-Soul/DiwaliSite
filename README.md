@@ -1,7 +1,7 @@
 <h1>Diwali Wishing Website - Created by Ankit</h1>
 <h2>Overview</h2>
 
-<p>This Diwali Wishing Website is a project created by Ankit to spread joy and celebrate the festival of lights, Diwali. The website is designed to allow users to send personalized Diwali wishes to their friends and family in a unique and digital way.
+<p style="color: green;">This Diwali Wishing Website is a project created by Ankit to spread joy and celebrate the festival of lights, Diwali. The website is designed to allow users to send personalized Diwali wishes to their friends and family in a unique and digital way.
 Features</p>
     User-Friendly Interface: The website boasts an intuitive and user-friendly interface, making it easy for anyone to navigate and send wishes effortlessly.
 
